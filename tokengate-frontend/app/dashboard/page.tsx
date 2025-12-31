@@ -17,7 +17,9 @@ function DashboardContent() {
     abi: TOKEN_GATE_ABI,
     functionName: "balanceOf",
     args: address ? [address] : undefined,
-    enabled: !!address,
+    query: {
+      enabled: !!address,
+    },
   });
 
   useEffect(() => {

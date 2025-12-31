@@ -23,12 +23,14 @@ export default function Home() {
     abi: TOKEN_GATE_ABI,
     functionName: "balanceOf",
     args: address ? [address] : undefined,
-    enabled: !!address,
+    query: {
+      enabled: !!address,
+    },
   });
 
   if (!mounted) return null;
 
-  const hasAccess = data && Number(data) > 0;
+  const hasAccess = Boolean(data && Number(data) > 0);
   const nftBalance = data ? Number(data) : 0;
 
   return (

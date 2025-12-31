@@ -15,7 +15,9 @@ export function TokenGate({ children }: { children: React.ReactNode }) {
     abi: TOKEN_GATE_ABI,
     functionName: "balanceOf",
     args: address ? [address] : undefined,
-    enabled: !!address,
+    query: {
+      enabled: !!address,
+    },
   });
 
   // Loading state

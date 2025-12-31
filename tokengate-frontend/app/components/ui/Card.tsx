@@ -3,9 +3,10 @@ interface CardProps {
   className?: string;
   hover?: boolean;
   gradient?: boolean;
+  style?: React.CSSProperties;
 }
 
-export function Card({ children, className = "", hover = false, gradient = false }: CardProps) {
+export function Card({ children, className = "", hover = false, gradient = false, style }: CardProps) {
   return (
     <div
       className={`
@@ -15,6 +16,7 @@ export function Card({ children, className = "", hover = false, gradient = false
         ${gradient ? "gradient-bg text-white border-none" : ""}
         ${className}
       `}
+      style={style}
     >
       {children}
     </div>
