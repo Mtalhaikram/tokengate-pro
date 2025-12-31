@@ -17,6 +17,24 @@ directly from the blockchain.
 - Handling real-world Web3 edge cases (loading, access denial, hydration issues)
 - Building UI that clearly communicates blockchain-based trust to users
 
+### 🔒 Security Notice
+
+**This repository is PUBLIC and safe for sharing:**
+- ✅ All sensitive data (API keys, private keys) use environment variables
+- ✅ `.env` files are in `.gitignore` and NOT committed
+- ✅ `.env.example` files contain placeholder values only
+- ✅ Contract address is public (deployed on Sepolia testnet)
+- ✅ Security checks automated via GitHub Actions
+
+**Before contributing, read:**
+- [SECURITY.md](./SECURITY.md) - Full security documentation
+- [SECURITY_CHECKLIST.md](./SECURITY_CHECKLIST.md) - Pre-commit checklist
+
+**Run security check before pushing:**
+```bash
+bash scripts/check-security.sh
+```
+
 ### ✨ Features
 
 #### Core Functionality

@@ -1,5 +1,10 @@
 node_modules
 .env
+.env.local
+.env.*.local
+
+# Allow example files
+!.env.example
 
 # Hardhat files
 /cache

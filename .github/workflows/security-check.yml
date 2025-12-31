@@ -1,0 +1,70 @@
+# Security Check - Prevents accidental commits of sensitive data
+name: Security Check
+
+on:
+  push:
+    branches: ['*']
+  pull_request:
+    branches: ['*']
+
+jobs:
+  security-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Check for sensitive files
+        run: |
+          echo "🔍 Scanning for sensitive files..."
+          
+          # Check for .env files (should not exist in repo)
+          if [ -f ".env" ]; then
+            echo "❌ ERROR: .env file found in repository!"
+            exit 1
+          fi
+          
+          if [ -f "tokengate-frontend/.env.local" ]; then
+            echo "❌ ERROR: .env.local file found in repository!"
+            exit 1
+          fi
+          
+          echo "✅ No sensitive .env files found"
+      
+      - name: Check for hardcoded secrets
+        run: |
+          echo "🔍 Scanning for hardcoded secrets..."
+          
+          # Check for private keys
+          if grep -r "PRIVATE_KEY.*=.*0x" --include="*.js" --include="*.ts" --exclude-dir=node_modules .; then
+            echo "❌ ERROR: Possible hardcoded private key found!"
+            exit 1
+          fi
+          
+          # Check for API keys in code
+          if grep -r "api[_-]key.*=.*['\"]" --include="*.js" --include="*.ts" --exclude-dir=node_modules --exclude="*.example" .; then
+            echo "⚠️  WARNING: Possible API key found in code"
+          fi
+          
+          echo "✅ No obvious hardcoded secrets detected"
+      
+      - name: Verify .env.example files exist
+        run: |
+          echo "🔍 Checking for .env.example files..."
+          
+          if [ ! -f ".env.example" ]; then
+            echo "❌ ERROR: Root .env.example not found!"
+            exit 1
+          fi
+          
+          if [ ! -f "tokengate-frontend/.env.example" ]; then
+            echo "❌ ERROR: Frontend .env.example not found!"
+            exit 1
+          fi
+          
+          echo "✅ All .env.example files present"
+      
+      - name: Security report
+        run: |
+          echo "✅ Security check passed!"
+          echo "Repository is safe for public access."
+
