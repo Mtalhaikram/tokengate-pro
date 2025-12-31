@@ -2,6 +2,10 @@
 
 A full-stack Web3 application demonstrating NFT-based access control in a production-style setup that provides exclusive content access based on ERC-721 NFT ownership. Built with modern Web3 technologies and featuring a polished, professional UI.
 
+### 🌐 Live Demo
+
+**Check out the live demo:** [https://tokengate-pro.vercel.app/](https://tokengate-pro.vercel.app/)
+
 ### 💡 Why TokenGate Pro?
 
 TokenGate Pro demonstrates how Web3 can replace traditional role-based access control
